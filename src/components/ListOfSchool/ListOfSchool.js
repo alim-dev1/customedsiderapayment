@@ -6,9 +6,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import { z } from "zod";
 import Link from "next/link";
-import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/navigation";
-const stripePromise = loadStripe("your-publishable-key-here");
 
 const studentSchema = z.object({
   firstName: z.string().min(1, "First Name is required"),
