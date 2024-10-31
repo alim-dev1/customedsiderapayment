@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* font family */
+* {
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-color: #e7edf3 !important;
+}
+.form-select {
+  padding: 15px !important;
+  font-size: 13px !important;
+}
+.form-select option {
+  font-size: 13px;
+}
+.inputBox input {
+  width: 100%;
+  height: 48px;
+  border-radius: 5px;
+  border-color: #dee2e6;
+  border: unset;
+  padding-left: 10px;
+}
+.inputBox input::placeholder {
+  font-size: 13px !important;
+  color: black;
+}
+.inputBox input:focus {
+  width: 100%;
+  height: 48px;
+  border-radius: 5px;
+  border-color: #dee2e6;
+  border: unset;
+  padding-left: 10px;
+  box-shadow: unset !important;
+}
+.form-select:focus {
+  border-color: 1px solid #dee2e6 !important;
+  outline: unset !important;
+  box-shadow: unset !important;
+}
+.fontsize {
+  font-size: 10px;
+  margin-top: 10px;
+}
+.addInputBtn button {
+  font-size: 13px;
+  text-decoration: unset;
+  color: black;
+  font-weight: 500;
+}
+.labelsize label {
+  display: inline-block;
+  font-size: 13px;
+}
+@media screen and (max-width: 992px) {
+  .form-select {
+    margin-bottom: 15px;
+  }
+  .inputBox input {
+    margin-bottom: 15px;
+  }
+}

@@ -1,0 +1,46 @@
+.cards_group {
+  margin-top: 10px;
+}
+.cards_group h3 {
+  font-family: "Poppins";
+  font-size: 22px;
+  font-weight: 600;
+}
+.addMoreBtn {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.remoark {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.remoark Button {
+  display: flex;
+  color: white;
+  background-color: black;
+  width: max-content;
+  padding: 10px 26px;
+  border-radius: 7px;
+  text-decoration: auto;
+  border: unset;
+}
+.remoark p {
+  margin-bottom: 0;
+}
+.logout {
+  display: flex;
+  color: white;
+  background-color: black;
+  width: max-content;
+  margin-left: auto;
+  padding: 10px 26px;
+  border-radius: 7px;
+  text-decoration: auto;
+}
+.valuepayment {
+  font-size: 20px;
+  margin-left: 11px;
+  font-weight: 700;
+}
