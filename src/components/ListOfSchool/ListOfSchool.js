@@ -9,6 +9,39 @@ import Link from "next/link";
 import logodashboard from "../../../public/logodashboard.svg";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { loadStripe } from "@stripe/stripe-js";
+import { useCallback } from "react";
+
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout,
+} from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(
+  "sk_test_51H0T8SJj1gOlwmJXWMcNKI9EKmbKbCuTsjBTNTG7Ig2nK0VObvK5tM3FGZPOeKbRybGT3F7uGCXXPasT94HivsBE00teD6jda7"
+);
+
+const CheckoutForm = () => {
+  const fetchClientSecret = useCallback(() => {
+    // Create a Checkout Session
+    return fetch("/create-checkout-session", {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => data.clientSecret);
+  }, []);
+
+  const options = { fetchClientSecret };
+
+  return (
+    <div id="checkout">
+      <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
+        <EmbeddedCheckout />
+      </EmbeddedCheckoutProvider>
+    </div>
+  );
+};
 
 const studentSchema = z.object({
   firstName: z.string().min(1, "First Name is required"),
@@ -44,7 +77,7 @@ const Cards = () => {
     const fetchSchools = async () => {
       try {
         const response = await axios.get(
-          "https://edsidera-release-231650504fa8.herokuapp.com/api/school/get"
+          "https://edsidera-staging-7ab88110fccd.herokuapp.com/api/school/get"
         );
         setSchools(response.data.data.schools || []);
       } catch (error) {
@@ -62,7 +95,7 @@ const Cards = () => {
 
       try {
         const response = await axios.get(
-          `https://edsidera-release-231650504fa8.herokuapp.com/api/award/all/${schoolId}`
+          `https://edsidera-staging-7ab88110fccd.herokuapp.com/api/award/all/${schoolId}`
         );
         setAwards(response.data.data.Awards || []);
       } catch (error) {
@@ -168,8 +201,16 @@ const Cards = () => {
     };
     console.log("Payload for payment:", payload);
     console.log("Total payment amount:", calculate);
+    CheckoutForm();
     router.push("/");
     setErrors("");
+  };
+
+  const logOut = () => {
+    Cookies.remove("loggedin");
+    Cookies.remove("role");
+    Cookies.remove("token");
+    window.location = "/";
   };
 
   return (
@@ -178,7 +219,7 @@ const Cards = () => {
         <Col lg={12}>
           <div className={styles.log0s}>
             <Image src={logodashboard} className="img-fluid" alt="log" />
-            <Link className={styles.logout} href="/">
+            <Link onClick={() => logOut()} className={styles.logout} href="/">
               Logout
             </Link>
           </div>
@@ -243,7 +284,7 @@ const Cards = () => {
                   handleStudentChange(index, "selectedClass", e.target.value)
                 }
               >
-                <option value="">Open this select menu</option>
+                <option value="">Select Class</option>
                 {awards
                   .filter(
                     (award) => award.id === parseInt(student.selectedAward)
