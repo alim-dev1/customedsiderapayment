@@ -6,7 +6,9 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import { z } from "zod";
 import Link from "next/link";
+import logodashboard from "../../../public/logodashboard.svg";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const studentSchema = z.object({
   firstName: z.string().min(1, "First Name is required"),
@@ -174,9 +176,12 @@ const Cards = () => {
     <Container>
       <Row className={`gx-2 gy-4 ${styles.cards_group}`}>
         <Col lg={12}>
-          <Link className={styles.logout} href="/">
-            Logout
-          </Link>
+          <div className={styles.log0s}>
+            <Image src={logodashboard} className="img-fluid" alt="log" />
+            <Link className={styles.logout} href="/">
+              Logout
+            </Link>
+          </div>
         </Col>
         <Col lg={3}>
           <h3>Select Schools</h3>
